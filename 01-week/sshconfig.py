@@ -11,6 +11,12 @@ def sshconfig_entry(host, dh):
     if dh:
         print("  KexAlgorithms +diffie-hellman-group1-sha1")
 
+    alias_entry(host)
+
+def alias_entry(host):
+    """Print a line in .alias """
+    print('alias {0}="ssh s-{0}"'.format(host))
+
 
 if __name__ == "__main__":
     somehost = "somehost"

@@ -14,7 +14,7 @@ def sshconfig_entry(host, dh):
     alias_entry(host)
 
 def alias_entry(host):
-    """Print a line in .alias """
+    """Print a line in .alias file."""
     print('alias {0}="ssh s-{0}"'.format(host))
 
 

@@ -22,7 +22,7 @@ def alias_entry(host):
 
 def Main():
     parser = argparse.ArgumentParser()
-    parser.add_argument("-t", "--type", choices=['s', 't'],
+    parser.add_argument("-t", "--type", choices=['s', 't'], default='s',
                         help='s for ssh, t for telnet', metavar="")
     parser.add_argument("-u", "--user", type=str, default="admin",
                         help='user to connect with default=admin', metavar="")
@@ -33,7 +33,11 @@ def Main():
     parser.add_argument("-n", "--hostname", required=True,
                         help='Hostname of device', metavar="")
     args = parser.parse_args()
-    sshconfig_entry(args.hostname, args.domain, args.user, args.diffie)
+    if args.type == 's':
+        sshconfig_entry(args.hostname, args.domain, args.user, args.diffie)
+    elif args.type == 't':
+        print(args)
+
 
 
 if __name__ == "__main__":

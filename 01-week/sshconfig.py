@@ -19,7 +19,18 @@ def alias_entry(host):
     print('alias {0}="ssh s-{0}"'.format(host))
 
 
+def Main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument("-t", "--type", dest='contype', action='store',
+                        choices=['s','t'],
+                        help='s for ssh, t for telnet')
+
+    parser.add_argument("-h", "--hostname", type=str, 
+                        help="Hostname of device")
+
+    args = parser.parse_args()
+
+#    print(args.echo)
+
 if __name__ == "__main__":
-    SOME_HOST = "some_host"
-    DH = True
-    sshconfig_entry(SOME_HOST, DH)
+    Main()

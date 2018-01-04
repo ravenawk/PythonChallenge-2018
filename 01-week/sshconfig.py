@@ -4,10 +4,10 @@
 import argparse
 
 
-def sshconfig_entry(host, user, diffieh):
+def sshconfig_entry(host, domain, user, diffieh):
     """Print a line of the .ssh config."""
     print("Host {}".format(host))
-    print("  Hostname {}.ne.pvhmc.org".format(host))
+    print("  Hostname {}.{}".format(host, domain))
     print("  Port {}".format(22))
     print("  User {}".format(user))
     if diffieh:
@@ -17,21 +17,23 @@ def sshconfig_entry(host, user, diffieh):
 
 def alias_entry(host):
     """Print a line in .alias file."""
-    print('alias {0}="ssh s-{0}"'.format(host))
+    print('alias s-{0}="ssh {0}"'.format(host))
 
 
 def Main():
     parser = argparse.ArgumentParser()
     parser.add_argument("-t", "--type", choices=['s', 't'],
-                        help='s for ssh, t for telnet')
+                        help='s for ssh, t for telnet', metavar="")
     parser.add_argument("-u", "--user", type=str, default="admin",
-                        help='user to connect with')
-    parser.add_argument("-d", "--diffie", action='store_true',
-                        help='Set diffie-hellman flag (used in old ssh')
+                        help='user to connect with default=admin', metavar="")
+    parser.add_argument("-d", "--domain", type=str, default="ne.pvhmc.org",
+                        help='Domain name default=ne.pvhmc.org', metavar="")
+    parser.add_argument("-D", "--diffie", action='store_true',
+                        help='Set diffie-hellman flag (used in old ssh)')
     parser.add_argument("-n", "--hostname", required=True,
-                        help='Hostname of device')
+                        help='Hostname of device', metavar="")
     args = parser.parse_args()
-    sshconfig_entry(args.hostname, args.user, args.diffie)
+    sshconfig_entry(args.hostname, args.domain, args.user, args.diffie)
 
 
 if __name__ == "__main__":

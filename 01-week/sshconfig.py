@@ -24,13 +24,9 @@ def Main():
     parser.add_argument("-t", "--type", dest='contype', action='store',
                         choices=['s','t'],
                         help='s for ssh, t for telnet')
-
-    parser.add_argument("-h", "--hostname", type=str, 
-                        help="Hostname of device")
-
+    parser.add_argument("-n", "--hostname", help='Hostname of device')
     args = parser.parse_args()
-
-#    print(args.echo)
+    
 
 if __name__ == "__main__":
     Main()

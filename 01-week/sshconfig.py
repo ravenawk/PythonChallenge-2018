@@ -3,6 +3,7 @@
 
 import argparse
 import os
+import re
 
 
 def sshconf(host, domain, user, diffieh):
@@ -11,7 +12,7 @@ def sshconf(host, domain, user, diffieh):
         with open(os.path.expanduser("~/.ssh/config"), 'r') as sshconf:
             for line in sshconf:
                 if line == "Host {}\n".format(host):
-                    print("Connection already exists")
+                    print("Already in ssh config")
                     return
 
     with open(os.path.expanduser("~/.ssh/config"), 'a') as sshconf:
@@ -23,15 +24,26 @@ def sshconf(host, domain, user, diffieh):
             sshconf.write("  KexAlgorithms +diffie-hellman-group1-sha1\n")
         sshconf.write("\n")
 
-        alias_entry(host, 's')
+    return
 
 
-def alias_entry(host, contype):
+def alias_entry(host, domain, contype):
     """Print a line in .alias file."""
     aliasfile = os.path.expanduser("~/.c-aliases")
+    if os.path.isfile(aliasfile):
+        with open(aliasfile, 'r') as calias:
+            for line in calias:
+                if re.match("^alias {}".format(host), line):
+                    print("Already in c-alias file")
+                    return
+
     with open(aliasfile, 'a') as aliases:
         if contype == 's':
-            aliases.write('alias s-{0}="ssh {0}"\n'.format(host))
+            aliases.write('alias {0}="ssh {0}"\n'.format(host))
+        elif contype == 't':
+            aliases.write('alias {0}="telnet {0}.{1}"\n'.format(host, domain))
+
+    return
 
 
 def Main():
@@ -51,8 +63,10 @@ def Main():
 
     if args.type == 's':
         sshconf(args.hostname, args.domain, args.user, args.diffie)
-    elif args.type == 't':
-        print(args)
+
+    alias_entry(args.hostname, args.domain, args.type)
+
+    return
 
 
 if __name__ == "__main__":

@@ -21,6 +21,7 @@ def alias_entry(host):
 
 
 def Main():
+    """Run if run as a program."""
     parser = argparse.ArgumentParser()
     parser.add_argument("-t", "--type", choices=['s', 't'], default='s',
                         help='s for ssh, t for telnet', metavar="")
@@ -38,8 +39,10 @@ def Main():
     elif args.type == 't':
         print(args)
 
-    if os.path.isfile("~/.ssh/config"):
+    if os.path.isfile(os.path.expanduser("~/.ssh/config")):
         print("exists")
+    else:
+        print("doesn't exist")
 
 
 if __name__ == "__main__":

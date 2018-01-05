@@ -5,20 +5,33 @@ import argparse
 import os
 
 
-def sshconfig_entry(host, domain, user, diffieh):
+def sshconf(host, domain, user, diffieh):
     """Print a line of the .ssh config."""
-    print("Host {}".format(host))
-    print("  Hostname {}.{}".format(host, domain))
-    print("  Port {}".format(22))
-    print("  User {}".format(user))
-    if diffieh:
-        print("  KexAlgorithms +diffie-hellman-group1-sha1")
-    alias_entry(host)
+    if os.path.isfile(os.path.expanduser("~/.ssh/config")):
+        with open(os.path.expanduser("~/.ssh/config"), 'r') as sshconf:
+            for line in sshconf:
+                if line == "Host {}\n".format(host):
+                    print("Connection already exists")
+                    return
+
+    with open(os.path.expanduser("~/.ssh/config"), 'a') as sshconf:
+        sshconf.write("Host {}\n".format(host))
+        sshconf.write("  Hostname {}.{}\n".format(host, domain))
+        sshconf.write("  Port {}\n".format(22))
+        sshconf.write("  User {}\n".format(user))
+        if diffieh:
+            sshconf.write("  KexAlgorithms +diffie-hellman-group1-sha1\n")
+        sshconf.write("\n")
+
+        alias_entry(host, 's')
 
 
-def alias_entry(host):
+def alias_entry(host, contype):
     """Print a line in .alias file."""
-    print('alias s-{0}="ssh {0}"'.format(host))
+    aliasfile = os.path.expanduser("~/.c-aliases")
+    with open(aliasfile, 'a') as aliases:
+        if contype == 's':
+            aliases.write('alias s-{0}="ssh {0}"\n'.format(host))
 
 
 def Main():
@@ -35,12 +48,9 @@ def Main():
     parser.add_argument("-n", "--hostname", required=True,
                         help='Hostname of device', metavar="")
     args = parser.parse_args()
-    sshconfig_exists = os.path.isfile(os.path.expanduser("~/.ssh/config"))
-    alias_exists = os.path.isfile(os.path.expanduser("~/.c-aliases"))
-    if args.type == 's':
-        if sshconfig_exists:
 
-        sshconfig_entry(args.hostname, args.domain, args.user, args.diffie)
+    if args.type == 's':
+        sshconf(args.hostname, args.domain, args.user, args.diffie)
     elif args.type == 't':
         print(args)
 

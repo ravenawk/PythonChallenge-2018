@@ -1,0 +1,634 @@
+Host c-wan-r1
+  HostName wan-r1.ne.pvhmc.org
+  Port 22
+  User admin
+
+Host c-coresw1
+  HostName dc-coresw1.ne.pvhmc.org
+  Port 22
+  User admin
+  KexAlgorithms +diffie-hellman-group1-sha1
+
+Host c-coresw2
+  HostName dc-coresw2.ne.pvhmc.org
+  Port 22
+  User admin
+  KexAlgorithms +diffie-hellman-group1-sha1
+
+Host c-pvh-1-lab-sw2
+  HostName pvh-1-lab-sw2.ne.pvhmc.org
+  Port 22
+  User admin
+  KexAlgorithms +diffie-hellman-group1-sha1
+
+Host c-pvh-1-temp1-sw1
+  HostName pvh-1-temp1-sw1.ne.pvhmc.org
+  Port 22
+  User admin
+  KexAlgorithms +diffie-hellman-group1-sha1
+
+Host c-pvh-1-lab-sw4
+  HostName pvh-1-lab-sw4.ne.pvhmc.org
+  Port 22
+  User admin
+  KexAlgorithms +diffie-hellman-group1-sha1
+
+Host c-pvh-b-fac-sw1
+  HostName pvh-b-fac-sw1.ne.pvhmc.org
+  Port 22
+  User admin
+  KexAlgorithms +diffie-hellman-group1-sha1
+
+Host c-pvh-1-hr-sw4
+  HostName pvh-1-hr-sw4.ne.pvhmc.org
+  Port 22
+  User admin
+  KexAlgorithms +diffie-hellman-group1-sha1
+
+Host c-inet-fw3-active
+  HostName inet-fw3-active.ne.pvhmc.org
+  Port 22
+  User admin
+  KexAlgorithms +diffie-hellman-group1-sha1
+
+Host c-inet-fw5
+  HostName inet-fw5.ne.pvhmc.org
+  Port 22
+  User admin
+  KexAlgorithms +diffie-hellman-group1-sha1
+
+Host c-pvh-2-icu3-sw2
+  HostName dc-cpvh-2-icu3-sw2.ne.pvhmc.org
+  Port 22
+  User admin
+  KexAlgorithms +diffie-hellman-group1-sha1
+
+Host c-cha-1-1-sw1
+  HostName cha-1-1-sw1.ne.pvhmc.org
+  Port 22
+  User admin
+  KexAlgorithms +diffie-hellman-group1-sha1
+
+Host c-cha-1-1-sw2
+  HostName cha-1-1-sw2.ne.pvhmc.org
+  Port 22
+  User admin
+  KexAlgorithms +diffie-hellman-group1-sha1
+
+Host c-cha-1-1-sw3
+  HostName cha-1-1-sw3.ne.pvhmc.org
+  Port 22
+  User admin
+  KexAlgorithms +diffie-hellman-group1-sha1
+
+
+Host c-cha-1-2-sw1
+  HostName cha-1-2-sw1.ne.pvhmc.org
+  Port 22
+  User admin
+  KexAlgorithms +diffie-hellman-group1-sha1
+
+Host c-cha-1-2-sw2
+  HostName cha-1-2-sw2.ne.pvhmc.org
+  Port 22
+  User admin
+  KexAlgorithms +diffie-hellman-group1-sha1
+
+Host c-pvh-1-rad-sw3
+  HostName pvh-1-rad-sw3.ne.pvhmc.org
+  Port 22
+  User admin
+  KexAlgorithms +diffie-hellman-group1-sha1
+
+Host c-pvh-1-rad-sw1
+  HostName pvh-1-rad-sw1.ne.pvhmc.org
+  Port 22
+  User admin
+  KexAlgorithms +diffie-hellman-group1-sha1
+
+Host c-pvh-b-is-sw1
+  HostName pvh-b-is-sw1.ne.pvhmc.org
+  Port 22
+  User admin
+  KexAlgorithms +diffie-hellman-group1-sha1
+
+Host c-pvh-b-is-sw2
+  HostName pvh-b-is-sw2.ne.pvhmc.org
+  Port 22
+  User admin
+  KexAlgorithms +diffie-hellman-group1-sha1
+
+Host c-pvh-b-ts-sw1
+  HostName pvh-b-ts-sw1.ne.pvhmc.org
+  Port 22
+  User admin
+  KexAlgorithms +diffie-hellman-group1-sha1
+
+Host c-pvh-b-ts-sw2
+  HostName pvh-b-ts-sw2.ne.pvhmc.org
+  Port 22
+  User admin
+  KexAlgorithms +diffie-hellman-group1-sha1
+
+Host c-pvh-b-is-sw3
+  HostName pvh-b-is-sw3.ne.pvhmc.org
+  Port 22
+  User admin
+  KexAlgorithms +diffie-hellman-group1-sha1
+
+Host c-pvh-2-wc-sw1
+  HostName pvh-2-wc-sw1.ne.pvhmc.org
+  Port 22
+  User admin
+  KexAlgorithms +diffie-hellman-group1-sha1
+
+Host c-pvh-1-wc-sw1
+  HostName pvh-1-wc-sw1.ne.pvhmc.org
+  Port 22
+  User admin
+  KexAlgorithms +diffie-hellman-group1-sha1
+
+Host c-dc-c7-sw1
+  HostName dc-c7-sw1.ne.pvhmc.org
+  Port 22
+  User admin
+  KexAlgorithms +diffie-hellman-group1-sha1
+
+Host c-dc-c1-sw1
+  HostName dc-c1-sw1.ne.pvhmc.org
+  Port 22
+  User admin
+  KexAlgorithms +diffie-hellman-group1-sha1
+
+Host c-dc-b1-sw1
+  HostName dc-b1-sw1.ne.pvhmc.org
+  Port 22
+  User admin
+  KexAlgorithms +diffie-hellman-group1-sha1
+
+Host c-dc-b2-sw1
+  HostName dc-b2-sw1.ne.pvhmc.org
+  Port 22
+  User admin
+  KexAlgorithms +diffie-hellman-group1-sha1
+
+Host c-dc-a6-sw1
+  HostName dc-a6-sw1.ne.pvhmc.org
+  Port 22
+  User admin
+  KexAlgorithms +diffie-hellman-group1-sha1
+
+Host c-dc-a4-sw1
+  HostName dc-a4-sw1.ne.pvhmc.org
+  Port 22
+  User admin
+  KexAlgorithms +diffie-hellman-group1-sha1
+
+Host c-dc-d6-sw1
+  HostName dc-d6-sw1.ne.pvhmc.org
+  Port 22
+  User admin
+  KexAlgorithms +diffie-hellman-group1-sha1
+
+Host c-dc-b9-sw1
+  HostName dc-b9-sw1.ne.pvhmc.org
+  Port 22
+  User admin
+  KexAlgorithms +diffie-hellman-group1-sha1
+
+Host c-dc-b5-sw1
+  HostName dc-b9-sw1.ne.pvhmc.org
+  Port 22
+  User admin
+  KexAlgorithms +diffie-hellman-group1-sha1
+
+Host c-dc-b3-sw1
+  HostName dc-b3-sw1.ne.pvhmc.org
+  Port 22
+  User admin
+  KexAlgorithms +diffie-hellman-group1-sha1
+
+Host c-dc-a7-sw1
+  HostName dc-a7-sw1.ne.pvhmc.org
+  Port 22
+  User admin
+  KexAlgorithms +diffie-hellman-group1-sha1
+
+Host c-dc-b6-sw1
+  HostName dc-b6-sw1.ne.pvhmc.org
+  Port 22
+  User admin
+  KexAlgorithms +diffie-hellman-group1-sha1
+
+Host c-dc-c7-sw2
+  HostName dc-c7-sw2.ne.pvhmc.org
+  Port 22
+  User admin
+  KexAlgorithms +diffie-hellman-group1-sha1
+
+Host c-dc-c7-sw3
+  HostName dc-c7-sw3.ne.pvhmc.org
+  Port 22
+  User admin
+  KexAlgorithms +diffie-hellman-group1-sha1
+
+Host c-pvh-2-dou2-sw1
+  HostName pvh-2-dou2-sw1.ne.pvhmc.org
+  Port 22
+  User admin
+  KexAlgorithms +diffie-hellman-group1-sha1
+
+Host c-pvh-2-dou2-sw2
+  HostName pvh-2-dou2-sw2.ne.pvhmc.org
+  Port 22
+  User admin
+  KexAlgorithms +diffie-hellman-group1-sha1
+
+Host c-pvh-2-peds-sw2
+  HostName pvh-2-peds-sw2.ne.pvhmc.org
+  Port 22
+  User admin
+  KexAlgorithms +diffie-hellman-group1-sha1
+
+Host c-pvh-3-3sou-sw1
+  HostName pvh-3-3sou-sw1.ne.pvhmc.org
+  Port 22
+  User admin
+  KexAlgorithms +diffie-hellman-group1-sha1
+
+Host c-pvh-3-3sou-sw2
+  HostName pvh-3-3sou-sw2.ne.pvhmc.org
+  Port 22
+  User admin
+  KexAlgorithms +diffie-hellman-group1-sha1
+
+Host c-pvh-3-3sou-sw3
+  HostName pvh-3-3sou-sw3.ne.pvhmc.org
+  Port 22
+  User admin
+  KexAlgorithms +diffie-hellman-group1-sha1
+
+Host c-pvh-3-3sou-sw4
+  HostName pvh-3-3sou-sw4.ne.pvhmc.org
+  Port 22
+  User admin
+  KexAlgorithms +diffie-hellman-group1-sha1
+
+Host c-pvh-5-5cen-sw4
+  HostName pvh-5-5cen-sw4.ne.pvhmc.org
+  Port 22
+  User admin
+  KexAlgorithms +diffie-hellman-group1-sha1
+
+Host c-pvh-5-5cen-sw1
+  HostName pvh-5-5cen-sw1.ne.pvhmc.org
+  Port 22
+  User admin
+  KexAlgorithms +diffie-hellman-group1-sha1
+
+Host c-ch-1-1-ss1
+  HostName ch-1-1-ss1.ne.pvhmc.org
+  Port 22
+  User admin
+  KexAlgorithms +diffie-hellman-group1-sha1
+
+Host c-pvh-2-cicu-sw1
+  HostName pvh-2-cicu-sw1.ne.pvhmc.org
+  Port 22
+  User admin
+  KexAlgorithms +diffie-hellman-group1-sha1
+
+Host c-pvh-2-cicu-sw2
+  HostName pvh-2-cicu-sw2.ne.pvhmc.org
+  Port 22
+  User admin
+  KexAlgorithms +diffie-hellman-group1-sha1
+
+Host c-cla-2-1-sw1
+  HostName cla-2-1-sw1.ne.pvhmc.org
+  Port 22
+  User admin
+  KexAlgorithms +diffie-hellman-group1-sha1
+
+Host c-cla-1-1-sw1
+  HostName cla-1-1-sw1.ne.pvhmc.org
+  Port 22
+  User admin
+  KexAlgorithms +diffie-hellman-group1-sha1
+
+Host c-pchc-1-1-sw1
+  HostName pchc-1-1-sw1.ne.pvhmc.org
+  Port 22
+  User admin
+  KexAlgorithms +diffie-hellman-group1-sha1
+
+Host c-pcc-1-1-sw1
+  HostName pcc-1-1-sw1.ne.pvhmc.org
+  Port 22
+  User admin
+  KexAlgorithms +diffie-hellman-group1-sha1
+
+Host c-cla-2-2-sw1
+  HostName cla-2-2-sw1.ne.pvhmc.org
+  Port 22
+  User admin
+  KexAlgorithms +diffie-hellman-group1-sha1
+
+Host c-cla-2-2-sw2
+  HostName cla-2-2-sw2.ne.pvhmc.org
+  Port 22
+  User admin
+  KexAlgorithms +diffie-hellman-group1-sha1
+
+Host c-cla-2-2-sw3
+  HostName cla-2-2-sw3.ne.pvhmc.org
+  Port 22
+  User admin
+  KexAlgorithms +diffie-hellman-group1-sha1
+
+Host c-pvh-3-qm-ss1
+  HostName pvh-3-qm-ss1.ne.pvhmc.org
+  Port 22
+  User admin
+
+Host c-pvh-3-qm-sw1
+  HostName pvh-3-qm-sw1.ne.pvhmc.org
+  Port 22
+  User admin
+  KexAlgorithms +diffie-hellman-group1-sha1
+
+Host c-pvh-3-qm-sw2
+  HostName pvh-3-qm-sw2.ne.pvhmc.org
+  Port 22
+  User admin
+  KexAlgorithms +diffie-hellman-group1-sha1
+
+Host c-ccc-1-1-ss1
+  HostName ccc-1-1-ss1.ne.pvhmc.org
+  Port 22
+  User admin
+
+Host c-ccc-1-1-ss2
+  HostName ccc-1-1-ss2.ne.pvhmc.org
+  Port 22
+  User admin
+
+Host c-art-r
+  HostName art-3-1-r.ne.pvhmc.org
+  Port 22
+  User admin
+  KexAlgorithms +diffie-hellman-group1-sha1
+
+Host c-art-3-1-sw1
+  HostName art-3-1-sw1.ne.pvhmc.org
+  Port 22
+  User admin
+  KexAlgorithms +diffie-hellman-group1-sha1
+
+Host c-art-1-1-sw1
+  HostName art-1-1-sw1.ne.pvhmc.org
+  Port 22
+  User admin
+  KexAlgorithms +diffie-hellman-group1-sha1
+
+Host c-pvh-b-phsw-sw1
+  HostName pvh-b-phsw-sw1.ne.pvhmc.org
+  Port 22
+  User admin
+  KexAlgorithms +diffie-hellman-group1-sha1
+
+Host c-pvh-b-phsw-sw2
+  HostName pvh-b-phsw-sw2.ne.pvhmc.org
+  Port 22
+  User admin
+  KexAlgorithms +diffie-hellman-group1-sha1
+
+Host c-pvh-1-wc-phsw1
+  HostName pvh-1-wc-phsw1.ne.pvhmc.org
+  Port 22
+  User admin
+  KexAlgorithms +diffie-hellman-group1-sha1
+
+Host c-pvh-b-ac-sw1
+  HostName pvh-b-ac-sw1.ne.pvhmc.org
+  Port 22
+  User admin
+  KexAlgorithms +diffie-hellman-group1-sha1
+
+Host c-pvh-b-him-sw1
+  HostName pvh-b-him-sw1.ne.pvhmc.org
+  Port 22
+  User admin
+  KexAlgorithms +diffie-hellman-group1-sha1
+
+Host c-pvh-b-him-sw4
+  HostName pvh-b-him-sw4.ne.pvhmc.org
+  Port 22
+  User admin
+  KexAlgorithms +diffie-hellman-group1-sha1
+
+Host c-pvh-b-him-sw2
+  HostName pvh-b-him-sw2.ne.pvhmc.org
+  Port 22
+  User admin
+  KexAlgorithms +diffie-hellman-group1-sha1
+
+Host c-pvh-b-him-sw3
+  HostName pvh-b-him-sw3.ne.pvhmc.org
+  Port 22
+  User admin
+  KexAlgorithms +diffie-hellman-group1-sha1
+
+Host c-pvh-3-3sou-sw5
+  HostName pvh-3-3sou-sw5.ne.pvhmc.org
+  Port 22
+  User admin
+  KexAlgorithms +diffie-hellman-group1-sha1
+
+Host c-3sp-2-1-sw1
+  HostName 3sp-2-1-sw1.ne.pvhmc.org
+  Port 22
+  User admin
+  KexAlgorithms +diffie-hellman-group1-sha1
+
+Host c-3sp-5-1-sw1
+  HostName 3sp-5-1-sw1.ne.pvhmc.org
+  Port 22
+  User admin
+  KexAlgorithms +diffie-hellman-group1-sha1
+
+Host c-3sp-5-1-sw2
+  HostName 3sp-5-1-sw2.ne.pvhmc.org
+  Port 22
+  User admin
+  KexAlgorithms +diffie-hellman-group1-sha1
+
+Host c-3sp-5-1-ss1
+  HostName 3sp-5-1-ss1.ne.pvhmc.org
+  Port 22
+  User admin
+  KexAlgorithms +diffie-hellman-group1-sha1
+
+Host c-3sp-2-1-sw22
+  HostName 3sp-2-1-sw2.ne.pvhmc.org
+  Port 22
+  User admin
+  KexAlgorithms +diffie-hellman-group1-sha1
+
+Host c-3sp-2-1-sw3
+  HostName 3sp-2-1-sw3.ne.pvhmc.org
+  Port 22
+  User admin
+  KexAlgorithms +diffie-hellman-group1-sha1
+
+Host c-3sp-2-1-sw4
+  HostName 3sp-2-1-sw4.ne.pvhmc.org
+  Port 22
+  User admin
+  KexAlgorithms +diffie-hellman-group1-sha1
+
+Host c-mri-1-1-sw1
+  HostName mri-1-1-sw1.ne.pvhmc.org
+  Port 22
+  User admin
+  KexAlgorithms +diffie-hellman-group1-sha1
+
+Host c-inet-fw1
+  HostName inet-fw1.ne.pvhmc.org
+  Port 22
+  User pmartin
+  KexAlgorithms +diffie-hellman-group1-sha1
+
+Host c-inet-fw2
+  HostName inet-fw2.ne.pvhmc.org
+  Port 22
+  User admin
+  KexAlgorithms +diffie-hellman-group1-sha1
+
+Host di-1-1-sw1
+  HostName di-1-1-sw1.ne.pvhmc.org
+  Port 22
+  User admin
+  KexAlgorithms +diffie-hellman-group1-sha1
+
+Host c-3sp-4-4cen-sw1
+  HostName 3sp-4-4cen-sw1.ne.pvhmc.org
+  Port 22
+  User admin
+  KexAlgorithms +diffie-hellman-group1-sha1
+
+Host di-1-1-sw2
+  HostName di-1-1-sw2.ne.pvhmc.org
+  Port 22
+  User admin
+  KexAlgorithms +diffie-hellman-group1-sha1
+
+Host c-3spa-r
+  HostName 3sp-2-1-r.ne.pvhmc.org
+  Port 22
+  User admin
+
+Host c-ch-r
+  HostName ch-r.ne.pvhmc.org
+  Port 22
+  User admin
+
+Host c-ccc-r
+  HostName ccc-r.ne.pvhmc.org
+  Port 22
+  User admin
+
+Host c-cla-r
+  HostName cla-r.ne.pvhmc.org
+  Port 22
+  User admin
+
+Host c-ftp
+  HostName plxftp.pvhmc.org
+  Port 22
+  User pmartin
+
+Host c-time01
+  HostName plxtime01.pvhmc.org
+  Port 22
+  User pmartin
+
+Host c-time02
+  HostName plxtime02.pvhmc.org
+  Port 22
+  User pmartin
+
+Host c-relay
+  HostName plxrelayint.pvhmc.org
+  Port 22
+  User wpmartin
+
+Host c-plxnms1
+  HostName plxnms1.pvhmc.org
+  Port 22
+  User pmartin
+
+Host c-plxmonitor01
+  HostName plxmonitor01.pvhmc.org
+  Port 22
+  User pmartin
+
+Host c-pvh-2-cath-sw1
+  HostName  pvh-2-cath-sw1.ne.pvhmc.org
+  Port 22
+  User admin
+  KexAlgorithms +diffie-hellman-group1-sha1
+
+Host c-pvh-2-cath-sw2
+  HostName  pvh-2-cath-sw2.ne.pvhmc.org
+  Port 22
+  User admin
+  KexAlgorithms +diffie-hellman-group1-sha1
+
+Host c-pvh-2-cath-sw3
+  HostName  pvh-2-cath-sw3.ne.pvhmc.org
+  Port 22
+  User admin
+  KexAlgorithms +diffie-hellman-group1-sha1
+
+Host c-pvh-b-nos-sw2
+  HostName  pvh-b-nos-sw2.ne.pvhmc.org
+  Port 22
+  User admin
+  KexAlgorithms +diffie-hellman-group1-sha1
+
+Host c-pvh-b-nos-sw1
+  HostName  pvh-b-nos-sw1.ne.pvhmc.org
+  Port 22
+  User admin
+  KexAlgorithms +diffie-hellman-group1-sha1
+
+Host c-pcc-fw1
+  HostName  pcc-fw1.ne.pvhmc.org
+  Port 22
+  User admin
+  KexAlgorithms +diffie-hellman-group1-sha1
+
+Host c-kcf-fw1
+  HostName  kcf-fw1.ne.pvhmc.org
+  Port 22
+  User admin
+  KexAlgorithms +diffie-hellman-group1-sha1
+
+Host c-arch-fw1
+  HostName  arch-fw1.ne.pvhmc.org
+  Port 22
+  User admin
+  KexAlgorithms +diffie-hellman-group1-sha1
+
+Host c-arch-1-1-ss1
+  HostName  arch-1-1-ss1.ne.pvhmc.org
+  Port 22
+  User admin
+  KexAlgorithms +diffie-hellman-group1-sha1
+
+Host c-dc-b4-sw1
+  HostName  dc-b4-sw1.ne.pvhmc.org
+  Port 22
+  User admin
+  KexAlgorithms +diffie-hellman-group1-sha1

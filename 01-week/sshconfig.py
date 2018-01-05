@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Program to add hosts to ssh config file and create aliases."""
 
-import argparse
+import argparse, os
 
 
 def sshconfig_entry(host, domain, user, diffieh):
@@ -38,6 +38,8 @@ def Main():
     elif args.type == 't':
         print(args)
 
+    if os.path.isfile("~/.ssh/config"):
+        print("exists")
 
 
 if __name__ == "__main__":

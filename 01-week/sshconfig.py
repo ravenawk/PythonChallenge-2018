@@ -6,7 +6,7 @@ import os
 
 
 def sshconf(host, domain, user, diffieh, configfile):
-    """Print a line of the .ssh config."""
+    """Print an entry for .ssh config."""
     with open(configfile, 'a') as sshconf:
         sshconf.write("Host {}\n".format(host))
         sshconf.write("  Hostname {}.{}\n".format(host, domain))
@@ -15,23 +15,21 @@ def sshconf(host, domain, user, diffieh, configfile):
         if diffieh:
             sshconf.write("  KexAlgorithms +diffie-hellman-group1-sha1\n")
         sshconf.write("\n")
-
     return
 
 
 def alias_entry(host, domain, contype, aliasfile):
-    """Print a line in .alias file."""
+    """Print a line in .c-aliases file."""
     with open(aliasfile, 'a') as aliases:
         if contype == 's':
             aliases.write('alias {0}="ssh {0}"\n'.format(host))
         elif contype == 't':
             aliases.write('alias {0}="telnet {0}.{1}"\n'.format(host, domain))
-
     return
 
 
 def entry_check(host, filename):
-    """Check if entry is in file."""
+    """Check if host is in a file."""
     if not os.path.isfile(filename):
         return False
     with open(filename) as lines:
@@ -39,9 +37,6 @@ def entry_check(host, filename):
             if host in line:
                 return True
     return False
-
-
-#def con_remove(host)
 
 
 def Main():
@@ -75,9 +70,6 @@ def Main():
             print("removing alias")
     else:
         alias_entry(args.hostname, args.domain, args.type, aliasfile)
-
-#    if (args.remove):
-#        con_remove(args.hostname)
 
     return
 

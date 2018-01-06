@@ -70,7 +70,6 @@ def Main():
             print("removing alias")
     else:
         alias_entry(args.hostname, args.domain, args.type, aliasfile)
-
     return
 
 

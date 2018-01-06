@@ -39,6 +39,14 @@ def entry_check(host, filename):
     return False
 
 
+def remove_entry(host, filename):
+    """Remove an entry from ssh config and c-aliases."""
+    with open(filename, 'r') as lines:
+        memfile = lines.readlines()
+    for line in memfile:
+        print(line)
+
+
 def Main():
     """Run if run as a program."""
     aliasfile = os.path.expanduser("~/.c-aliases")
@@ -63,7 +71,7 @@ def Main():
 
     if entry_check(args.hostname, sshconfig):
         if args.remove:
-            print("removing ssh")
+            remove_entry(args.hostname, sshconfig)
     elif not args.telnet:
         sshconf(args.hostname, args.domain, args.user, args.port,
                 args.diffie, sshconfig)

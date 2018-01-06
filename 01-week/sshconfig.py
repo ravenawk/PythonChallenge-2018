@@ -3,19 +3,11 @@
 
 import argparse
 import os
-import re
 
 
-def sshconf(host, domain, user, diffieh):
+def sshconf(host, domain, user, diffieh, configfile):
     """Print a line of the .ssh config."""
-    if os.path.isfile(os.path.expanduser("~/.ssh/config")):
-        with open(os.path.expanduser("~/.ssh/config"), 'r') as sshconf:
-            for line in sshconf:
-                if line == "Host {}\n".format(host):
-                    print("Already in ssh config")
-                    return
-
-    with open(os.path.expanduser("~/.ssh/config"), 'a') as sshconf:
+    with open(configfile, 'a') as sshconf:
         sshconf.write("Host {}\n".format(host))
         sshconf.write("  Hostname {}.{}\n".format(host, domain))
         sshconf.write("  Port {}\n".format(22))
@@ -27,16 +19,8 @@ def sshconf(host, domain, user, diffieh):
     return
 
 
-def alias_entry(host, domain, contype):
+def alias_entry(host, domain, contype, aliasfile):
     """Print a line in .alias file."""
-    aliasfile = os.path.expanduser("~/.c-aliases")
-    if os.path.isfile(aliasfile):
-        with open(aliasfile, 'r') as calias:
-            for line in calias:
-                if re.match("^alias {}".format(host), line):
-                    print("Already in c-alias file")
-                    return
-
     with open(aliasfile, 'a') as aliases:
         if contype == 's':
             aliases.write('alias {0}="ssh {0}"\n'.format(host))
@@ -46,9 +30,28 @@ def alias_entry(host, domain, contype):
     return
 
 
+def entry_check(host, filename):
+    """Check if entry is in file."""
+    if not os.path.isfile(filename):
+        return False
+    with open(filename) as lines:
+        for line in lines:
+            if host in line:
+                return True
+    return False
+
+
+#def con_remove(host)
+
+
 def Main():
     """Run if run as a program."""
+    aliasfile = os.path.expanduser("~/.c-aliases")
+    sshconfig = os.path.expanduser("~/.ssh/config")
+
     parser = argparse.ArgumentParser()
+    parser.add_argument("-r", "--remove", action='store_true',
+                        help="Remove entry")
     parser.add_argument("-t", "--type", choices=['s', 't'], default='s',
                         help='s for ssh, t for telnet', metavar="")
     parser.add_argument("-u", "--user", type=str, default="admin",
@@ -61,10 +64,20 @@ def Main():
                         help='Hostname of device', metavar="")
     args = parser.parse_args()
 
-    if args.type == 's':
-        sshconf(args.hostname, args.domain, args.user, args.diffie)
+    if entry_check(args.hostname, sshconfig):
+        if args.remove:
+            print("removing ssh")
+    elif args.type == 's':
+        sshconf(args.hostname, args.domain, args.user, args.diffie, sshconfig)
 
-    alias_entry(args.hostname, args.domain, args.type)
+    if entry_check(args.hostname, aliasfile):
+        if args.remove:
+            print("removing alias")
+    else:
+        alias_entry(args.hostname, args.domain, args.type, aliasfile)
+
+#    if (args.remove):
+#        con_remove(args.hostname)
 
     return
 

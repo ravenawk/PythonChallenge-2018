@@ -35,11 +35,7 @@ def Main():
     parser.add_argument("-n", "--hostname", required=True,
                         help='Hostname of device', metavar="")
     args = parser.parse_args()
-    sshconfig_exists = os.path.isfile(os.path.expanduser("~/.ssh/config"))
-    alias_exists = os.path.isfile(os.path.expanduser("~/.c-aliases"))
     if args.type == 's':
-        if sshconfig_exists:
-
         sshconfig_entry(args.hostname, args.domain, args.user, args.diffie)
     elif args.type == 't':
         print(args)

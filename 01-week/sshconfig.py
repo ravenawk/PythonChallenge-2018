@@ -39,12 +39,22 @@ def entry_check(host, filename):
     return False
 
 
-def remove_entry(host, filename):
+def remove_entry(host, filename, filepath):
     """Remove an entry from ssh config and c-aliases."""
-    with open(filename, 'r') as lines:
+    deleteblock = False
+    with open(filepath, 'r') as lines:
         memfile = lines.readlines()
-    for line in memfile:
-        print(line)
+    with open(filepath, 'w') as newfile:
+        for line in memfile:
+            if host in line:
+                deleteblock = True
+            elif (deleteblock and
+                  filename == "sshconfig" and
+                  ("Host " not in line)):
+                pass
+            else:
+                newfile.write(line)
+                deleteblock = False
 
 
 def Main():
@@ -71,14 +81,14 @@ def Main():
 
     if entry_check(args.hostname, sshconfig):
         if args.remove:
-            remove_entry(args.hostname, sshconfig)
+            remove_entry(args.hostname, "sshconfig", sshconfig)
     elif not args.telnet:
         sshconf(args.hostname, args.domain, args.user, args.port,
                 args.diffie, sshconfig)
 
     if entry_check(args.hostname, aliasfile):
         if args.remove:
-            print("removing alias")
+            remove_entry(args.hostname, "c-aliases", aliasfile)
     else:
         alias_entry(args.hostname, args.domain, args.telnet, aliasfile)
     return

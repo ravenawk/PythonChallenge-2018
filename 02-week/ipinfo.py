@@ -5,7 +5,7 @@ import json
 import requests
 # from pprint import pprint
 
-website = "http://ip-api.com/json/8.8.8.8"
+website = "http://ip-api.com/json/"
 
 
 def getipinfo(website):
@@ -17,11 +17,14 @@ def getipinfo(website):
 
 def printinfo(ipinfo):
     """Print out the Ip info."""
-    print("IP : {}".format(ipinfo['query']))
-    print("ISP: {}".format(ipinfo['isp']))
-    print("City: {}".format(ipinfo['city']))
-    print("Country: {}".format(ipinfo['country']))
-    print("Country Code: {}".format(ipinfo['countryCode']))
+    tabular = "{:<15} : {:<25}"
+    print()
+    print(tabular.format("IP", ipinfo['query']))
+    print(tabular.format("ISP", ipinfo['isp']))
+    print(tabular.format("City", ipinfo['city']))
+    print(tabular.format("Country", ipinfo['country']))
+    print(tabular.format("Country Code", ipinfo['countryCode']))
+    print()
 
 
 def Main():

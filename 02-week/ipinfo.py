@@ -22,6 +22,7 @@ def printinfo(ipinfo):
     print(tabular.format("IP", ipinfo['query']))
     print(tabular.format("ISP", ipinfo['isp']))
     print(tabular.format("City", ipinfo['city']))
+    print(tabular.format("Region", ipinfo['region']))
     print(tabular.format("Country", ipinfo['country']))
     print(tabular.format("Country Code", ipinfo['countryCode']))
     print()

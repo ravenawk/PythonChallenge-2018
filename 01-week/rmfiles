@@ -1,4 +1,0 @@
-#!/bin/bash
-
-rm ~/.c-aliases
-rm ~/.ssh/config

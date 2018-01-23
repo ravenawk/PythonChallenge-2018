@@ -1,0 +1,787 @@
+: Saved
+: 
+: Serial Number: JMX1218L2YD
+: Hardware:   ASA5520, 2048 MB RAM, CPU Pentium 4 Celeron 2000 MHz
+:
+ASA Version 9.1(6) 
+!
+hostname inet-fw4
+domain-name ne.pvhmc.org
+enable password MNeVICwrWSWxvDVb encrypted
+xlate per-session deny tcp any4 any4
+xlate per-session deny tcp any4 any6
+xlate per-session deny tcp any6 any4
+xlate per-session deny tcp any6 any6
+xlate per-session deny udp any4 any4 eq domain
+xlate per-session deny udp any4 any6 eq domain
+xlate per-session deny udp any6 any4 eq domain
+xlate per-session deny udp any6 any6 eq domain
+names
+ip local pool Systems_Team_DHCP_Scope 10.140.1.200-10.140.1.225 mask 255.255.255.0
+!
+interface GigabitEthernet0/0
+ nameif outside
+ security-level 0
+ ip address 24.43.102.163 255.255.255.224 
+!
+interface GigabitEthernet0/1
+ nameif inside
+ security-level 100
+ ip address 10.140.1.2 255.255.255.0 
+!
+interface GigabitEthernet0/2
+ nameif DMZ
+ security-level 50
+ ip address 10.140.8.1 255.255.255.0 
+!
+interface GigabitEthernet0/3
+ shutdown
+ no nameif
+ no security-level
+ no ip address
+!
+interface Management0/0
+ shutdown
+ no nameif
+ no security-level
+ no ip address
+!
+banner exec 
+banner exec #####################################################################
+banner exec # WARNING:                                                          #
+banner exec #      If you have not explicitly been given permission             #
+banner exec #         to access this device then log out now.                   #
+banner exec #####################################################################
+banner exec 
+banner login 
+banner login #####################################################################
+banner login # WARNING:                                                          #
+banner login # This system is the property of Pomona Valley Hospital Medical     #
+banner login # Center. All activity is monitored and unauthorized use of this    #
+banner login # system will be prosecuted to the fullest extent of the law.       #
+banner login #####################################################################
+banner login 
+ftp mode passive
+clock timezone PST -8
+clock summer-time PDT recurring
+dns server-group DefaultDNS
+ domain-name ne.pvhmc.org
+object network PVHMC-network
+ subnet 10.0.0.0 255.0.0.0
+object network Stew_Test
+ host 10.140.8.7
+object network netscaler
+ host 10.140.8.11
+object network NSIP1
+ host 10.140.8.21
+ description Netscaler IP 1
+object network NSIP2
+ host 10.140.8.22
+ description Netscaler IP 2
+object network SNIP1
+ host 10.140.8.23
+ description Netscaler Subnet IP 1
+object network dc-ipam01
+ host 10.4.0.57
+ description Infoblox
+object network dc-ipam02
+ host 10.4.0.79
+ description Infoblox
+object network pvhpf01
+ host 10.129.200.14
+object network Servers_Network
+ subnet 10.4.0.0 255.252.0.0
+object network Citrix_RDS_Network
+ subnet 10.129.200.0 255.255.248.0
+ description AKA - Servers 2 Subnet
+object network Citrix_PVS_Network
+ subnet 10.9.24.0 255.255.248.0
+object network PVS_VDI_Network
+ subnet 10.40.8.0 255.255.248.0
+object network VDI_Workstations_Network
+ subnet 10.9.8.0 255.255.248.0
+object network pvhctxstore01
+ host 10.129.200.133
+object network pvhctxstore02
+ host 10.129.200.134
+object network pvhctxdc03
+ host 10.40.0.15
+object network pvhctxdc04
+ host 10.40.0.16
+object network pvhctxdc01
+ host 10.40.8.15
+object network pvhctxdc02
+ host 10.40.8.16
+object network pvhxactx01
+ host 10.129.200.103
+object network pvhxactx02
+ host 10.129.200.104
+object network pvhctxd01
+ host 10.129.200.156
+object network pvhctxd02
+ host 10.129.200.157
+object network pvhxd701
+ host 10.129.200.252
+object network pvhxd702
+ host 10.129.200.253
+object network pvhxadc01
+ host 10.4.0.49
+object network pvhxadc02
+ host 10.4.0.50
+object network pvhxa76dc01
+ host 10.4.0.43
+object network pvhxa76dc02
+ host 10.4.0.44
+object network Callback
+ host 10.140.8.25
+ description Netscaler Gateway 2 Callback
+object network hmc
+ host 10.140.8.24
+object network pvhdc04
+ host 10.4.0.84
+ description Active Directory Domain Controller 4
+object network pvhctxsf01
+ host 10.40.8.17
+object network pvhctxsf02
+ host 10.40.8.18
+object network apps
+ host 10.7.10.30
+ description apps.pvhmc.org StoreFront LB VIP
+object network pvhwnos
+ host 10.140.8.106
+ description Web server for WYSE thin clients remote updates
+object network wyse
+ host 10.140.8.29
+ description Netscaler VIP for pvhwnos
+object network wyse_ext
+ host 24.43.102.168
+object network securid
+ host 10.140.8.12
+ description Netscaler VIP for SecurID (plxrsaid)
+object network securid_ext
+ host 24.43.102.165
+ description External IP for SecurID
+object network pvhdc01
+ host 10.4.0.61
+ description DC Controller 1
+object network pvhdc02
+ host 10.4.0.62
+ description Active Directory Domain Controller 2
+object network pvhdc03
+ host 10.4.10.10
+ description Active Directory Domain Controller 3
+object network pvhdc05
+ host 10.4.0.59
+ description Active Directory Domain Controller 5
+object network plxrsaid
+ host 10.140.8.107
+ description RSA SecurID Server
+object network plxrelayint
+ host 10.129.200.29
+ description Internet email relay
+object network plxtime01
+ host 10.128.216.46
+ description Time Server 1
+object network plxtime02
+ host 10.4.10.79
+ description Time Server 2
+object network MGMT_Systems
+ range 10.100.2.0 10.100.3.255
+ description Systems and Network management systems
+object network plxctxmas
+ host 10.100.2.42
+object-group service DM_INLINE_TCP_1 tcp
+ port-object eq www
+ port-object eq https
+object-group network Systems_Team
+ network-object 10.100.0.0 255.255.254.0
+ network-object 10.128.216.0 255.255.248.0
+object-group service DM_INLINE_TCP_2 tcp
+ port-object eq 3008
+ port-object eq 3010
+ port-object eq www
+ port-object eq https
+ port-object eq ssh
+object-group network DM_INLINE_NETWORK_1
+ network-object object NSIP1
+ network-object object NSIP2
+ network-object object SNIP1
+object-group network Citrix_Storefront_Servers
+ network-object object pvhctxstore01
+ network-object object pvhctxstore02
+ network-object object pvhctxsf01
+ network-object object pvhctxsf02
+ network-object object apps
+object-group network DM_INLINE_NETWORK_2
+ network-object object NSIP1
+ network-object object NSIP2
+ network-object object SNIP1
+ network-object object Stew_Test
+ network-object object plxrsaid
+object-group network DM_INLINE_NETWORK_3
+ network-object object dc-ipam01
+ network-object object dc-ipam02
+object-group network DM_INLINE_NETWORK_4
+ network-object object NSIP1
+ network-object object NSIP2
+ network-object object SNIP1
+object-group network DM_INLINE_NETWORK_5
+ network-object object Citrix_PVS_Network
+ network-object object Citrix_RDS_Network
+ network-object object PVS_VDI_Network
+ network-object object Servers_Network
+ network-object object VDI_Workstations_Network
+object-group service DM_INLINE_TCP_3 tcp
+ port-object eq 2598
+ port-object eq 8008
+ port-object eq citrix-ica
+object-group service DM_INLINE_TCP_4 tcp
+ port-object eq www
+ port-object eq https
+object-group protocol TCPUDP
+ protocol-object udp
+ protocol-object tcp
+object-group network Citrix_XenApp_Data_Collectors
+ network-object object pvhctxdc01
+ network-object object pvhctxdc02
+ network-object object pvhctxdc03
+ network-object object pvhctxdc04
+object-group network DM_INLINE_NETWORK_7
+ network-object object pvhdc04
+ network-object object pvhpf01
+object-group service DM_INLINE_TCP_5 tcp
+ port-object eq www
+ port-object eq https
+object-group network DM_INLINE_NETWORK_6
+ network-object 10.100.0.0 255.255.254.0
+ network-object 10.128.216.0 255.255.248.0
+object-group service DM_INLINE_TCP_6 tcp
+ port-object eq www
+ port-object eq https
+object-group service DM_INLINE_TCP_7 tcp
+ port-object eq www
+ port-object eq https
+object-group network DM_INLINE_NETWORK_9
+ network-object object pvhwnos
+ network-object object wyse
+object-group service DM_INLINE_TCP_8 tcp
+ port-object eq 7004
+ port-object eq www
+ port-object eq https
+object-group network DM_INLINE_NETWORK_8
+ network-object object pvhdc01
+ network-object object pvhdc02
+ network-object object pvhdc03
+ network-object object pvhdc04
+ network-object object pvhdc05
+object-group service DM_INLINE_TCP_9 tcp
+ port-object eq ldap
+ port-object eq ldaps
+object-group service DM_INLINE_SERVICE_1
+ service-object tcp destination eq 5500 
+ service-object tcp destination eq 7002 
+ service-object tcp destination eq 7004 
+ service-object tcp destination eq 7072 
+ service-object tcp destination eq 7082 
+ service-object tcp destination eq 8443 
+ service-object tcp destination eq www 
+ service-object tcp destination eq https 
+ service-object tcp destination eq ssh 
+ service-object udp destination eq snmp 
+object-group network Time_Servers
+ description Access to Time Servers
+ network-object object plxtime01
+ network-object object plxtime02
+object-group service DM_INLINE_TCP_10 tcp
+ port-object eq 7004
+ port-object eq www
+ port-object eq https
+object-group network NetScalers
+ description NetScalers
+ network-object host 10.140.8.21
+ network-object host 10.140.8.22
+ network-object host 10.4.1.93
+ network-object host 10.4.1.94
+ network-object host 10.8.16.21
+ network-object host 10.8.16.22
+object-group service DM_INLINE_TCP_11 tcp
+ port-object eq 27000
+ port-object eq 5454
+ port-object eq 5557
+ port-object eq 7279
+ port-object eq www
+ port-object eq https
+ port-object eq ldap
+ port-object eq ldaps
+ port-object eq smtp
+ port-object eq ssh
+ port-object eq tacacs
+object-group service DM_INLINE_UDP_1 udp
+ port-object eq 1812
+ port-object eq 4739
+ port-object eq ntp
+ port-object eq snmp
+ port-object eq snmptrap
+ port-object eq syslog
+ port-object eq tacacs
+access-list PVHMC standard permit 10.0.0.0 255.0.0.0 
+access-list outside_access_in remark All pings allowed
+access-list outside_access_in extended permit icmp any any 
+access-list outside_access_in remark hmc.pvhmc.org - for Home Coders
+access-list outside_access_in extended permit tcp any object hmc object-group DM_INLINE_TCP_1 
+access-list outside_access_in remark RSA SecurID for tokens
+access-list outside_access_in extended permit tcp any object securid object-group DM_INLINE_TCP_8 
+access-list outside_access_in remark Access for remote WYSE clients (Home Coders, etc) to update their software
+access-list outside_access_in extended permit tcp any object wyse object-group DM_INLINE_TCP_6 
+access-list inside_access_in remark Pings allowed
+access-list inside_access_in extended permit icmp any any 
+access-list inside_access_in remark Netscaler management
+access-list inside_access_in extended permit tcp object-group Systems_Team object-group DM_INLINE_NETWORK_1 object-group DM_INLINE_TCP_2 
+access-list inside_access_in remark Allowing connection from Management and Analytics Server to NetScalers per Juan UDP
+access-list inside_access_in extended permit udp object plxctxmas object-group NetScalers object-group DM_INLINE_UDP_1 
+access-list inside_access_in remark Allowing connection from Management and Analytics Server to NetScalers per Juan TCP
+access-list inside_access_in extended permit tcp object plxctxmas object-group NetScalers object-group DM_INLINE_TCP_11 
+access-list inside_access_in remark Storefront to validate against Netscaler that users are coming from there
+access-list inside_access_in extended permit tcp object-group Citrix_Storefront_Servers object Callback eq https 
+access-list inside_access_in extended permit tcp any object hmc object-group DM_INLINE_TCP_5 
+access-list inside_access_in remark Systems Team access to wyse.pvhmc.org per Paul Luu 2017-10-20
+access-list inside_access_in extended permit tcp object-group DM_INLINE_NETWORK_6 object-group DM_INLINE_NETWORK_9 object-group DM_INLINE_TCP_7 
+access-list inside_access_in remark SecurID managment
+access-list inside_access_in extended permit object-group DM_INLINE_SERVICE_1 any object plxrsaid 
+access-list inside_access_in extended permit tcp any object securid object-group DM_INLINE_TCP_10 
+access-list inside_access_in remark RDP to DMZ
+access-list inside_access_in extended permit tcp any object pvhwnos eq 3389 
+access-list inside_access_in extended permit tcp any object wyse eq https 
+access-list DMZ_access_in remark Pings allowed
+access-list DMZ_access_in extended permit icmp any any 
+access-list DMZ_access_in remark DMZ access to internal DNS
+access-list DMZ_access_in extended permit object-group TCPUDP object-group DM_INLINE_NETWORK_2 object-group DM_INLINE_NETWORK_3 eq domain 
+access-list DMZ_access_in remark Netscaler authentication to LDAPS
+access-list DMZ_access_in extended permit tcp object-group DM_INLINE_NETWORK_4 object-group DM_INLINE_NETWORK_7 eq ldaps 
+access-list DMZ_access_in remark Netscaler Subnet IP to Citrix Application Servers, Published Desktop Servers, and Virtual Desktops
+access-list DMZ_access_in extended permit tcp object SNIP1 object-group DM_INLINE_NETWORK_5 object-group DM_INLINE_TCP_3 
+access-list DMZ_access_in remark Netscaler Subnet IP to Citrix Storefront Servers
+access-list DMZ_access_in extended permit tcp object SNIP1 object-group Citrix_Storefront_Servers object-group DM_INLINE_TCP_4 
+access-list DMZ_access_in remark Netscaler Subnet IP to XenApp Data Collectors
+access-list DMZ_access_in extended permit tcp object SNIP1 object-group Citrix_XenApp_Data_Collectors eq www 
+access-list DMZ_access_in remark SecurID authentication to Active Directory
+access-list DMZ_access_in extended permit tcp object plxrsaid object-group DM_INLINE_NETWORK_8 object-group DM_INLINE_TCP_9 
+access-list DMZ_access_in remark Email alerts.  Access to internal email relay.pvhmc.org
+access-list DMZ_access_in extended permit tcp object plxrsaid any eq smtp 
+access-list DMZ_access_in remark Access to Time Server
+access-list DMZ_access_in extended permit udp object plxrsaid object-group Time_Servers eq ntp 
+access-list AnyConnect_Client_Local_Print extended deny ip any4 any4 
+access-list AnyConnect_Client_Local_Print extended permit tcp any4 any4 eq lpd 
+access-list AnyConnect_Client_Local_Print remark IPP: Internet Printing Protocol
+access-list AnyConnect_Client_Local_Print extended permit tcp any4 any4 eq 631 
+access-list AnyConnect_Client_Local_Print remark Windows' printing port
+access-list AnyConnect_Client_Local_Print extended permit tcp any4 any4 eq 9100 
+access-list AnyConnect_Client_Local_Print remark mDNS: multicast DNS protocol
+access-list AnyConnect_Client_Local_Print extended permit udp any4 host 224.0.0.251 eq 5353 
+access-list AnyConnect_Client_Local_Print remark LLMNR: Link Local Multicast Name Resolution protocol
+access-list AnyConnect_Client_Local_Print extended permit udp any4 host 224.0.0.252 eq 5355 
+access-list AnyConnect_Client_Local_Print remark TCP/NetBIOS protocol
+access-list AnyConnect_Client_Local_Print extended permit tcp any4 any4 eq 137 
+access-list AnyConnect_Client_Local_Print extended permit udp any4 any4 eq netbios-ns 
+pager lines 24
+logging enable
+logging timestamp
+logging buffer-size 65536
+logging buffered informational
+logging trap informational
+logging asdm informational
+logging host inside 10.4.10.91
+logging permit-hostdown
+mtu outside 1500
+mtu inside 1500
+mtu DMZ 1500
+no failover
+icmp unreachable rate-limit 1 burst-size 1
+no asdm history enable
+arp timeout 14400
+no arp permit-nonconnected
+!
+object network Stew_Test
+ nat (DMZ,outside) static 24.43.102.166
+object network hmc
+ nat (DMZ,outside) static 24.43.102.167
+object network wyse
+ nat (DMZ,outside) static wyse_ext
+object network securid
+ nat (DMZ,outside) static securid_ext
+!
+nat (inside,outside) after-auto source dynamic any interface
+nat (DMZ,outside) after-auto source dynamic any interface
+access-group outside_access_in in interface outside
+access-group inside_access_in in interface inside
+access-group DMZ_access_in in interface DMZ
+route outside 0.0.0.0 0.0.0.0 24.43.102.161 1 
+route inside 10.0.0.0 255.0.0.0 10.140.1.1 1 
+timeout xlate 3:00:00
+timeout pat-xlate 0:00:30
+timeout conn 1:00:00 half-closed 0:10:00 udp 0:02:00 icmp 0:00:02
+timeout sunrpc 0:10:00 h323 0:05:00 h225 1:00:00 mgcp 0:05:00 mgcp-pat 0:05:00
+timeout sip 0:30:00 sip_media 0:02:00 sip-invite 0:03:00 sip-disconnect 0:02:00
+timeout sip-provisional-media 0:02:00 uauth 0:05:00 absolute
+timeout tcp-proxy-reassembly 0:01:00
+timeout floating-conn 0:00:00
+dynamic-access-policy-record DfltAccessPolicy
+user-identity default-domain LOCAL
+aaa authentication ssh console LOCAL 
+aaa authorization exec LOCAL auto-enable
+http server enable
+http server idle-timeout 60
+http 0.0.0.0 0.0.0.0 inside
+snmp-server host inside 10.4.0.77 community ***** version 2c
+snmp-server location PVHMC Data Center
+snmp-server contact PVHMC Systems Team
+snmp-server enable traps snmp authentication linkup linkdown coldstart warmstart
+crypto ipsec ikev2 ipsec-proposal DES
+ protocol esp encryption des
+ protocol esp integrity sha-1 md5
+crypto ipsec ikev2 ipsec-proposal 3DES
+ protocol esp encryption 3des
+ protocol esp integrity sha-1 md5
+crypto ipsec ikev2 ipsec-proposal AES
+ protocol esp encryption aes
+ protocol esp integrity sha-1 md5
+crypto ipsec ikev2 ipsec-proposal AES192
+ protocol esp encryption aes-192
+ protocol esp integrity sha-1 md5
+crypto ipsec ikev2 ipsec-proposal AES256
+ protocol esp encryption aes-256
+ protocol esp integrity sha-1 md5
+crypto engine large-mod-accel
+crypto ipsec security-association pmtu-aging infinite
+crypto dynamic-map SYSTEM_DEFAULT_CRYPTO_MAP 65535 set ikev2 ipsec-proposal AES256 AES192 AES 3DES DES
+crypto map outside_map 65535 ipsec-isakmp dynamic SYSTEM_DEFAULT_CRYPTO_MAP
+crypto map outside_map interface outside
+crypto ca trustpoint ASDM_TrustPoint0
+ enrollment self
+ fqdn stvpn.pvhmc.org
+ subject-name CN=stvpn.pvhmc.org,OU=Information Services,O=Pomona Valley Hospital Medical Center,C=US,St=California,L=Pomona
+ crl configure
+crypto ca trustpoint PVHMC
+ enrollment self
+ fqdn stvpn.ne.pvhmc.org
+ subject-name CN=stvpn.pvhmc.org,OU=Information Services,O=Pomona Valley Hospital Medical Center,C=US,St=California,L=Pomona
+ keypair my.verisign.key
+ crl configure
+crypto ca trustpoint ASDM_TrustPoint1
+ enrollment terminal
+ subject-name CN=cerberus.pvhmc.org,OU=Information Services,O=Pomona Valley Hospital Medical Center,C=US,St=California,L=Pomona
+ keypair cerberus2016.key
+ crl configure
+crypto ca trustpoint ASDM_TrustPoint2
+ enrollment terminal
+ crl configure
+crypto ca trustpoint ASDM_TrustPoint2017
+ enrollment terminal
+ fqdn none
+ subject-name CN=cerberus.pvhmc.org,OU=Information Services,O=Pomona Valley Hospital Medical Center,C=US,St=California,L=Pomona
+ keypair cerberus2017.key
+ crl configure
+crypto ca trustpool policy
+crypto ca certificate chain PVHMC
+ certificate dc100f57
+    308202f7 30820260 a0030201 020204dc 100f5730 0d06092a 864886f7 0d010105 
+    05003081 bf310f30 0d060355 04071306 506f6d6f 6e613113 30110603 55040813 
+    0a43616c 69666f72 6e696131 0b300906 03550406 13025553 312e302c 06035504 
+    0a132550 6f6d6f6e 61205661 6c6c6579 20486f73 70697461 6c204d65 64696361 
+    6c204365 6e746572 311d301b 06035504 0b131449 6e666f72 6d617469 6f6e2053 
+    65727669 63657331 18301606 03550403 130f7374 76706e2e 7076686d 632e6f72 
+    67312130 1f06092a 864886f7 0d010902 16127374 76706e2e 6e652e70 76686d63 
+    2e6f7267 301e170d 31363034 31343033 35333237 5a170d32 36303431 32303335 
+    3332375a 3081bf31 0f300d06 03550407 1306506f 6d6f6e61 31133011 06035504 
+    08130a43 616c6966 6f726e69 61310b30 09060355 04061302 5553312e 302c0603 
+    55040a13 25506f6d 6f6e6120 56616c6c 65792048 6f737069 74616c20 4d656469 
+    63616c20 43656e74 6572311d 301b0603 55040b13 14496e66 6f726d61 74696f6e 
+    20536572 76696365 73311830 16060355 0403130f 73747670 6e2e7076 686d632e 
+    6f726731 21301f06 092a8648 86f70d01 09021612 73747670 6e2e6e65 2e707668 
+    6d632e6f 72673081 9f300d06 092a8648 86f70d01 01010500 03818d00 30818902 
+    818100a2 dcbf626e dce195f5 ce6ec87c 31d5bccc 02105e08 db49f558 e032ce10 
+    870e138c 56d3fc08 5a1184fb 23aec228 6084ffc3 2a7f3cf3 edb9c101 4df17c4f 
+    10c63eff 19883063 21e4bf36 b2da62c2 0dfa4722 fdb3f1ee 4e3a9a15 2aebaa39 
+    5a2d68e7 a80ac72b 00d12103 b4957c9d b50e7dc8 c62eb79b 61531a05 70253607 
+    d12ac102 03010001 300d0609 2a864886 f70d0101 05050003 81810078 ca2b9bc7 
+    023034ce 84372dec 9de99831 0bb7366f c48257ba 4e34f80d bf63f1e7 bd7e28df 
+    503a7016 c3ffe7c3 08b12633 6c37b16f e04aa827 43dca764 7326f214 bdd4b529 
+    5b219ee7 d3f3df7c 4d67a51c 6eebc47a 93ac924f 455abc6b 01c9ec27 61b25a77 
+    931639dd 2fd5b6f1 6dd22ff0 4a26082d 89553f8d c2f5e841 117945
+  quit
+crypto ca certificate chain ASDM_TrustPoint1
+ certificate 5f419620e103f9fb7fe3f8e132dc60f7
+    30820619 30820501 a0030201 0202105f 419620e1 03f9fb7f e3f8e132 dc60f730 
+    0d06092a 864886f7 0d01010b 0500307e 310b3009 06035504 06130255 53311d30 
+    1b060355 040a1314 53796d61 6e746563 20436f72 706f7261 74696f6e 311f301d 
+    06035504 0b131653 796d616e 74656320 54727573 74204e65 74776f72 6b312f30 
+    2d060355 04031326 53796d61 6e746563 20436c61 73732033 20536563 75726520 
+    53657276 65722043 41202d20 4734301e 170d3136 30353136 30303030 30305a17 
+    0d313730 35313632 33353935 395a3081 9f310b30 09060355 04061302 55533113 
+    30110603 5504080c 0a43616c 69666f72 6e696131 0f300d06 03550407 0c06506f 
+    6d6f6e61 312e302c 06035504 0a0c2550 6f6d6f6e 61205661 6c6c6579 20486f73 
+    70697461 6c204d65 64696361 6c204365 6e746572 311d301b 06035504 0b0c1449 
+    6e666f72 6d617469 6f6e2053 65727669 63657331 1b301906 03550403 0c126365 
+    72626572 75732e70 76686d63 2e6f7267 30820122 300d0609 2a864886 f70d0101 
+    01050003 82010f00 3082010a 02820101 00b96b7b fb062996 7d1685a8 bd4ff9c1 
+    cad48d8d 5eb81ef9 8f53609c 325b2910 3b9d3588 a8f3c1a5 f65469ed ef196c3f 
+    4f0b3b13 946ebbb4 2c3a2307 7f6fbcad f326fab4 52488fb0 c6ce8594 af34a4f4 
+    456ff343 ad26d22e ef5079d5 43d06d0a 31443526 9b224ed2 9af6eb5c c2093c78 
+    c967dcd4 450d75c6 e749f42e f46a8374 253f7b1b b163bc15 7b077a64 02a29483 
+    6a44ba2e 56b7dc56 cef24c9e 4ed85a5b 94ab692b 66e26372 14e43c63 524dae2e 
+    bf9c1cf8 b2f8f42e ebb6b6cd 15a2c6d2 289551ff df53dc05 d3ffeacc ad127b00 
+    51692971 3425c982 f23d5c6e b9798b16 9952ce3c 4e70e654 385326b2 755c4be8 
+    b6836149 fbc78b72 41f30211 aade7194 99020301 0001a382 026f3082 026b301d 
+    0603551d 11041630 14821263 65726265 7275732e 7076686d 632e6f72 67300906 
+    03551d13 04023000 300e0603 551d0f01 01ff0404 030205a0 302b0603 551d1f04 
+    24302230 20a01ea0 1c861a68 7474703a 2f2f7373 2e73796d 63622e63 6f6d2f73 
+    732e6372 6c306106 03551d20 045a3058 30560606 67810c01 0202304c 30230608 
+    2b060105 05070201 16176874 7470733a 2f2f642e 73796d63 622e636f 6d2f6370 
+    73302506 082b0601 05050702 0230190c 17687474 70733a2f 2f642e73 796d6362 
+    2e636f6d 2f727061 301d0603 551d2504 16301406 082b0601 05050703 0106082b 
+    06010505 07030230 1f060355 1d230418 30168014 5f60cf61 9055df84 43148a60 
+    2ab2f57a f44318ef 30570608 2b060105 05070101 044b3049 301f0608 2b060105 
+    05073001 86136874 74703a2f 2f73732e 73796d63 642e636f 6d302606 082b0601 
+    05050730 02861a68 7474703a 2f2f7373 2e73796d 63622e63 6f6d2f73 732e6372 
+    74308201 04060a2b 06010401 d6790204 020481f5 0481f200 f0007700 ddeb1d2b 
+    7a0d4fa6 208b81ad 8168707e 2e8e9d01 d55c888d 3d11c4cd b6ecbecc 00000154 
+    bb70a208 00000403 00483046 022100c5 7e76c054 c3c7a98c c3b72977 482352a2 
+    5d023e6f f94fabe8 26841821 3d657202 2100e983 5e1b9967 73ff8fc1 ef0fbbfc 
+    fcaeb665 388c6c91 1696f3e8 a557eb5e f39f0075 00a4b909 90b41858 1487bb13 
+    a2cc6770 0a3c3598 04f91bdf b8e377cd 0ec80ddc 10000001 54bb70a2 37000004 
+    03004630 44022041 f0aa7870 9d4826fb e249eeaa 375c3f88 0b59a2ad 8921138b 
+    88cb5953 96063402 2063e6ca 3cd2bd06 6c1086c6 f2f26857 3ad38a5b cf12a2fa 
+    4b959d4c 4b816355 0f300d06 092a8648 86f70d01 010b0500 03820101 00391cc2 
+    b6c03920 ee4a1511 db19abfb 474963bd 57b8e8db 2b0403ca a5617d0d 60be38ac 
+    9bbd8dce 5335fe05 034dcb34 5481d963 5cba8248 08866fc8 ab66fcae da018704 
+    19682f6e e9045189 b54d9905 44a56acc 7302bf39 a582d55b 242e5191 a38a1ccc 
+    18680b93 c2b31c26 eeb59ce6 02e73e05 66e3500c 21b36d46 85d498d2 ad89fc87 
+    d45ddfc1 dff103e9 9329830f 1e7ae9ad 9c444cee 44ea3559 f7a5dd54 bc2f6c66 
+    5899c6f8 e8d9ce3f 3738a4ff 20f5bba0 367cd5eb 1391dc39 644d363c 17fb6414 
+    057f144a 0d978329 58c5920c 18a1b015 1a10173f 0a661014 4fdcc67b 9a31ad35 
+    981cc072 14fc0005 4499bd7f b29ea78f 84bf3403 6fb72878 9be22ab8 1b
+  quit
+crypto ca certificate chain ASDM_TrustPoint2
+ certificate ca 513fb9743870b73440418d30930699ff
+    30820538 30820420 a0030201 02021051 3fb97438 70b73440 418d3093 0699ff30 
+    0d06092a 864886f7 0d01010b 05003081 ca310b30 09060355 04061302 55533117 
+    30150603 55040a13 0e566572 69536967 6e2c2049 6e632e31 1f301d06 0355040b 
+    13165665 72695369 676e2054 72757374 204e6574 776f726b 313a3038 06035504 
+    0b133128 63292032 30303620 56657269 5369676e 2c20496e 632e202d 20466f72 
+    20617574 686f7269 7a656420 75736520 6f6e6c79 31453043 06035504 03133c56 
+    65726953 69676e20 436c6173 73203320 5075626c 69632050 72696d61 72792043 
+    65727469 66696361 74696f6e 20417574 686f7269 7479202d 20473530 1e170d31 
+    33313033 31303030 3030305a 170d3233 31303330 32333539 35395a30 7e310b30 
+    09060355 04061302 5553311d 301b0603 55040a13 1453796d 616e7465 6320436f 
+    72706f72 6174696f 6e311f30 1d060355 040b1316 53796d61 6e746563 20547275 
+    7374204e 6574776f 726b312f 302d0603 55040313 2653796d 616e7465 6320436c 
+    61737320 33205365 63757265 20536572 76657220 4341202d 20473430 82012230 
+    0d06092a 864886f7 0d010101 05000382 010f0030 82010a02 82010100 b2d805ca 
+    1c742db5 175639c5 4a520996 e84bd80c f1689f9a 422862c3 a530537e 5511825b 
+    037a0d2f e17904c9 b4967719 81019459 f9bcf77a 9927822d b783dd5a 277fb203 
+    7a9c5325 e9481f46 4fc89d29 f8be7956 f6f7fdd9 3a68da8b 4b823341 12c3c83c 
+    ccd6967a 84211a22 04032717 8b1c6861 930f0e51 80331db4 b5ceeb7e d062acee 
+    b37b0174 ef6935eb cad53da9 ee9798ca 8daa440e 25994a15 96a4ce6d 02541f2a 
+    6a26e206 3a6348ac b44cd175 9350ff13 2fd6dae1 c618f59f c9255df3 003ade26 
+    4db42909 cd0f3d23 6f164a81 16fbf283 10c3b8d6 d855323d f1bd0fbd 8c52954a 
+    16977a52 2163752f 16f9c466 bef5b509 d8ff2700 cd447c6f 4b3fb0f7 02030100 
+    01a38201 63308201 5f301206 03551d13 0101ff04 08300601 01ff0201 00303006 
+    03551d1f 04293027 3025a023 a021861f 68747470 3a2f2f73 312e7379 6d63622e 
+    636f6d2f 70636133 2d67352e 63726c30 0e060355 1d0f0101 ff040403 02010630 
+    2f06082b 06010505 07010104 23302130 1f06082b 06010505 07300186 13687474 
+    703a2f2f 73322e73 796d6362 2e636f6d 306b0603 551d2004 64306230 60060a60 
+    86480186 f8450107 36305230 2606082b 06010505 07020116 1a687474 703a2f2f 
+    7777772e 73796d61 7574682e 636f6d2f 63707330 2806082b 06010505 07020230 
+    1c1a1a68 7474703a 2f2f7777 772e7379 6d617574 682e636f 6d2f7270 61302906 
+    03551d11 04223020 a41e301c 311a3018 06035504 03131153 796d616e 74656350 
+    4b492d31 2d353334 301d0603 551d0e04 1604145f 60cf6190 55df8443 148a602a 
+    b2f57af4 4318ef30 1f060355 1d230418 30168014 7fd365a7 c2ddecbb f03009f3 
+    4339fa02 af333133 300d0609 2a864886 f70d0101 0b050003 82010100 5e945649 
+    dd8e2d65 f5c13651 b603e3da 9e7319f2 1f59ab58 7e6c2605 2cfa81d7 5c231722 
+    2c3793f7 86ec85e6 b0a3fd1f e232a845 6fe1d9fb b9afd270 a0324265 bf84fe16 
+    2a8f3fc5 a6d6a393 7d43e974 21913528 f463e92e edf7f55c 7f4b9ab5 20e90abd 
+    e045100c 14949a5d a5e34b91 e8249b46 4065f422 72cd99f8 8811f5f3 7fe63382 
+    e6a8c57e fed008e2 25580871 68e6cda2 e614de4e 52242dfd e5791353 e75e2f2d 
+    4d1b6d40 15522bf7 87897812 816ed94d aa2d78d4 c22c3d08 5f87919e 1f0eb0de 
+    30526486 89aa9d66 9c0e760c 80f274d8 2af8b83a ced7d60f 11be6bab 14f5bd41 
+    a0226389 f1ba0f6f 2963662d 3fac8c72 c5fbc7e4 d40ff23b 4f8c29c7
+  quit
+crypto ca certificate chain ASDM_TrustPoint2017
+ certificate 44262847f1b3181ca0f09764b35008bc
+    30820618 30820500 a0030201 02021044 262847f1 b3181ca0 f09764b3 5008bc30 
+    0d06092a 864886f7 0d01010b 0500307e 310b3009 06035504 06130255 53311d30 
+    1b060355 040a1314 53796d61 6e746563 20436f72 706f7261 74696f6e 311f301d 
+    06035504 0b131653 796d616e 74656320 54727573 74204e65 74776f72 6b312f30 
+    2d060355 04031326 53796d61 6e746563 20436c61 73732033 20536563 75726520 
+    53657276 65722043 41202d20 4734301e 170d3137 30353039 30303030 30305a17 
+    0d313830 36303832 33353935 395a3081 9f310b30 09060355 04061302 55533113 
+    30110603 5504080c 0a43616c 69666f72 6e696131 0f300d06 03550407 0c06506f 
+    6d6f6e61 312e302c 06035504 0a0c2550 6f6d6f6e 61205661 6c6c6579 20486f73 
+    70697461 6c204d65 64696361 6c204365 6e746572 311d301b 06035504 0b0c1449 
+    6e666f72 6d617469 6f6e2053 65727669 63657331 1b301906 03550403 0c126365 
+    72626572 75732e70 76686d63 2e6f7267 30820122 300d0609 2a864886 f70d0101 
+    01050003 82010f00 3082010a 02820101 00d841a6 c223ad0a 2c231f0e dc698a12 
+    3ec1fc5d 94f3a6ec 1897534c 27ac415a be595c98 f9a8e5c1 4c717782 38aeff03 
+    b001a75c 231feb40 c5076590 906179d9 0c6751bd cf30d439 a181c1c0 b180ef56 
+    4b0203e9 c173eaac e4dd1eac 74984e53 a3c96ac0 ceeaa986 b372312e d69a6948 
+    c57caed6 a599fe66 f7f94f2b 4e491de5 96377705 9cec593a 12ffb76b 9753a9ee 
+    71ebd708 2fc7744c 96c1b606 571bcb63 1938aab8 0dcbb81f d4d8d196 4ab72990 
+    31ee2be9 7e149596 f80f1101 bbdbf376 fac4fb3a 9378bafa 4a9add27 382b9cfa 
+    0ba45e04 c07dc95b 9c6ad81a baa48539 8aca9a10 e939e69d e9586f8e 85028dc1 
+    a1e35de2 2b06f092 a6328c39 fceca079 21020301 0001a382 026e3082 026a301d 
+    0603551d 11041630 14821263 65726265 7275732e 7076686d 632e6f72 67300906 
+    03551d13 04023000 300e0603 551d0f01 01ff0404 030205a0 302b0603 551d1f04 
+    24302230 20a01ea0 1c861a68 7474703a 2f2f7373 2e73796d 63622e63 6f6d2f73 
+    732e6372 6c306106 03551d20 045a3058 30560606 67810c01 0202304c 30230608 
+    2b060105 05070201 16176874 7470733a 2f2f642e 73796d63 622e636f 6d2f6370 
+    73302506 082b0601 05050702 0230190c 17687474 70733a2f 2f642e73 796d6362 
+    2e636f6d 2f727061 301d0603 551d2504 16301406 082b0601 05050703 0106082b 
+    06010505 07030230 1f060355 1d230418 30168014 5f60cf61 9055df84 43148a60 
+    2ab2f57a f44318ef 30570608 2b060105 05070101 044b3049 301f0608 2b060105 
+    05073001 86136874 74703a2f 2f73732e 73796d63 642e636f 6d302606 082b0601 
+    05050730 02861a68 7474703a 2f2f7373 2e73796d 63622e63 6f6d2f73 732e6372 
+    74308201 03060a2b 06010401 d6790204 020481f4 0481f100 ef007500 ddeb1d2b 
+    7a0d4fa6 208b81ad 8168707e 2e8e9d01 d55c888d 3d11c4cd b6ecbecc 0000015b 
+    ef3554c6 00000403 00463044 022018db 2d2af071 82f1143d 2c3ef043 d4951e19 
+    c13d39cd 35cbd3f7 06ae6127 efad0220 58bdc2d3 84c2c6fc 6f79c54a 98502962 
+    b5cd7896 20d26a39 9bed2746 d24ce97b 007600a4 b90990b4 18581487 bb13a2cc 
+    67700a3c 359804f9 1bdfb8e3 77cd0ec8 0ddc1000 00015bef 35556000 00040300 
+    47304502 2100e93d 3737860a ee960f0c 88ff6d38 79f522aa f2e95706 0a6c664a 
+    d6af70e2 5c7a0220 376e0bdb 96fa9729 a482a045 463d1426 7bd12d0f 560bcc11 
+    ba1debd0 eca01e26 300d0609 2a864886 f70d0101 0b050003 82010100 06bcbe2d 
+    115f1a96 1d6dc223 fee4c763 c1c5419c 3de9b1f7 91168356 20587117 fd1ac731 
+    0d47bdf5 e98829cc 3fd4011f 0ccbf5cd f7de737a 5f37ecdd 910b354d f45977ee 
+    eb6428fb f7ff9161 1ec92996 56092883 c12ad0b6 08cf7a5a 8b878340 88f75ace 
+    d32b9f49 b734b5eb f7ccd763 dd532efa dd15681d 6cd75f1f 0d9c2020 64ad606f 
+    faa906e8 2e50d8dd ed3b7a78 a829e9ad a8fd0d07 8e42c9f0 31843e29 da5f2bde 
+    61bbacf7 9b3d2ac8 ca139525 dbfb68f3 678aa1d7 3c416b3b 609fcef0 5922db94 
+    6985adbf c9339e3c a8699199 af25e169 7ca6c917 d0384f8b f91ad961 8e3bbaec 
+    c4cf8f22 bc9e3d86 1efd535f 9053925a 78ea3d70 cdc42f12 20e30155
+  quit
+crypto ikev2 policy 1
+ encryption aes-256
+ integrity sha
+ group 5 2
+ prf sha
+ lifetime seconds 86400
+crypto ikev2 policy 10
+ encryption aes-192
+ integrity sha
+ group 5 2
+ prf sha
+ lifetime seconds 86400
+crypto ikev2 policy 20
+ encryption aes
+ integrity sha
+ group 5 2
+ prf sha
+ lifetime seconds 86400
+crypto ikev2 policy 30
+ encryption 3des
+ integrity sha
+ group 5 2
+ prf sha
+ lifetime seconds 86400
+crypto ikev2 policy 40
+ encryption des
+ integrity sha
+ group 5 2
+ prf sha
+ lifetime seconds 86400
+crypto ikev2 enable outside client-services port 443
+crypto ikev2 remote-access trustpoint PVHMC
+telnet timeout 5
+ssh stricthostkeycheck
+ssh 0.0.0.0 0.0.0.0 inside
+ssh 10.4.0.77 255.255.255.255 inside
+ssh timeout 60
+ssh key-exchange group dh-group14-sha1
+console timeout 0
+management-access inside
+vpn-sessiondb max-other-vpn-limit 750
+vpn-sessiondb max-anyconnect-premium-or-essentials-limit 250
+threat-detection basic-threat
+threat-detection statistics access-list
+no threat-detection statistics tcp-intercept
+ntp server 10.4.10.79 source inside prefer
+ntp server 10.128.216.46 source inside
+ssl encryption aes128-sha1 aes256-sha1
+ssl trust-point ASDM_TrustPoint2017 outside
+webvpn
+ enable outside
+ anyconnect image disk0:/anyconnect-linux-64-3.1.13015-k9.pkg 1
+ anyconnect image disk0:/anyconnect-win-3.1.13015-k9.pkg 2
+ anyconnect image disk0:/anyconnect-macosx-i386-3.1.13015-k9.pkg 3
+ anyconnect profiles Systems_Team_client_profile disk0:/Systems_Team_client_profile.xml
+ anyconnect enable
+ tunnel-group-list enable
+group-policy GroupPolicy_Systems_Team internal
+group-policy GroupPolicy_Systems_Team attributes
+ wins-server none
+ dns-server value 10.4.0.57 10.4.0.79
+ vpn-tunnel-protocol ikev2 ssl-client 
+ split-tunnel-policy tunnelspecified
+ split-tunnel-network-list value PVHMC
+ default-domain value pvhmc.org
+ webvpn
+  anyconnect profiles value Systems_Team_client_profile type user
+username sstewart password LQKfXKRMRyLOTVPh encrypted privilege 15
+username sstewart attributes
+ vpn-tunnel-protocol ikev1 ikev2 l2tp-ipsec ssl-client ssl-clientless
+ password-storage disable
+username admin password Cb.R2Xd0Yku3BmEY encrypted privilege 15
+username aguerrero password uhUdcp9OysGFyyHX encrypted privilege 1
+username bdempsey password kFEiIxYxZP6tNP59 encrypted privilege 1
+username wpmartin password JW3uOZHr96fGHe5W encrypted privilege 15
+username japerez password sAtD/G9DNeizcQys encrypted privilege 1
+username rocky password 1OBJT1NyKiI3ZLiS encrypted privilege 1
+username pmartin password 6/L/dX8crRNR6w1P encrypted privilege 1
+tunnel-group Systems_Team type remote-access
+tunnel-group Systems_Team general-attributes
+ address-pool Systems_Team_DHCP_Scope
+ default-group-policy GroupPolicy_Systems_Team
+tunnel-group Systems_Team webvpn-attributes
+ group-alias Systems_Team enable
+!
+class-map inspection_default
+ match default-inspection-traffic
+!
+!
+policy-map type inspect dns preset_dns_map
+ parameters
+  message-length maximum client auto
+  message-length maximum 512
+policy-map global_policy
+ class inspection_default
+  inspect dns preset_dns_map 
+  inspect ftp 
+  inspect h323 h225 
+  inspect h323 ras 
+  inspect ip-options 
+  inspect netbios 
+  inspect rsh 
+  inspect rtsp 
+  inspect skinny  
+  inspect esmtp 
+  inspect sqlnet 
+  inspect sunrpc 
+  inspect tftp 
+  inspect sip  
+  inspect xdmcp 
+!
+service-policy global_policy global
+prompt hostname context 
+no call-home reporting anonymous
+call-home
+ profile CiscoTAC-1
+  no active
+  destination address http https://tools.cisco.com/its/service/oddce/services/DDCEService
+  destination address email callhome@cisco.com
+  destination transport-method http
+  subscribe-to-alert-group diagnostic
+  subscribe-to-alert-group environment
+  subscribe-to-alert-group inventory periodic monthly
+  subscribe-to-alert-group configuration periodic monthly
+  subscribe-to-alert-group telemetry periodic daily
+Cryptochecksum:6cf2a491af2ddfe2c6431b68a93f1af0
+: end

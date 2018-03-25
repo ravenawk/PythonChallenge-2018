@@ -1,10 +1,10 @@
 #At least one python script every month for a year
 
-01 month
-   - Make shortcuts for ssh and telneting to servers and switches
-02 month 
-   - Get internet IP info for localhost or some other IP
-03 month 
-   - Get vendor information on MAC address
-   - Pull a cisco config
-04 month  
+1. January  
+   a. Make shortcuts for ssh and telneting to servers and switches
+2. February  
+   a.  Get internet IP info for localhost or some other IP
+3. March  
+   a. Get vendor information on MAC address  
+   b. Pull a cisco config
+4. April

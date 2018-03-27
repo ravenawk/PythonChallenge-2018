@@ -7,4 +7,5 @@
 3. 03-March  
    a. Get vendor information on MAC address  
    b. Pull a cisco config
+   c. Generate a Pelican Template
 4. 04-April

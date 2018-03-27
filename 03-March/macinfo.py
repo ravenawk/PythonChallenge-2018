@@ -22,7 +22,9 @@ def Main():
     website = "http://api.macvendors.com/"
 
     parser = argparse.ArgumentParser()
-    parser.add_argument("mac_address", type=str, help='MAC address to lookup',
+    parser.add_argument("mac_address",
+                        type=str,
+                        help='MAC address to lookup',
                         metavar="mac")
     args = parser.parse_args()
 

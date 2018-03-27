@@ -1,4 +1,4 @@
-#At least one python script every month for a year
+# At least one python script every month for a year
 
 1. 01 - January
 
@@ -15,5 +15,5 @@
    b. ciscon.py - Pull a cisco config 
 
    c. genpeltem.py - Generate a Pelican Template
-   
+
 4. 04 - April

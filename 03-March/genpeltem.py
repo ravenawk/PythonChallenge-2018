@@ -5,7 +5,7 @@ import argparse
 import datetime
 
 
-def Main():
+def main():
     """Run if run as a program."""
     parser = argparse.ArgumentParser()
     parser.add_argument("-T", "--title", type=str, required=True,
@@ -41,4 +41,4 @@ def Main():
 
 
 if __name__ == "__main__":
-    Main()
+    main()

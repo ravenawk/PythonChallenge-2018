@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Pull in cisco config."""
+"""Generate a Pelican markdown base page."""
 
 import argparse
 import datetime

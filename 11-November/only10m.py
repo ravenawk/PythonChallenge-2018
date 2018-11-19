@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # vim: tabstop=8 expandtab shiftwidth=4 softtabstop=4
-"""Pull a cisco port config."""
+"""Pull a cisco list of 10Meg devices."""
 
 from netmiko import ConnectHandler
 import getpass

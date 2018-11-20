@@ -7,8 +7,8 @@ import argparse
 
 def getmacinfo(website):
     """Get ip info from website."""
-    inforequest = requests.get(website)
-    infobyte = inforequest.content
+    info_request = requests.get(website, timeout=3)
+    infobyte = info_request.content
     macinfo = infobyte.decode("utf-8")
 
     tabular = "{:<7} : {:<25}"
@@ -17,9 +17,9 @@ def getmacinfo(website):
     print()
 
 
-def Main():
+def main():
     """Run if script is run."""
-    website = "http://api.macvendors.com/"
+    website = "https://api.macvendors.com/"
 
     parser = argparse.ArgumentParser()
     parser.add_argument("mac_address",
@@ -33,4 +33,4 @@ def Main():
 
 
 if __name__ == "__main__":
-    Main()
+    main()

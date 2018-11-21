@@ -42,8 +42,7 @@ def main():
             for i in interface_mac.split("\n"):
                 mo2 = match_mac.search(i)
                 if mo2 is not None:
-                    print(mo2.string.split()[1])
-
+                    print(mo2.group())
 
 
 if __name__ == "__main__":

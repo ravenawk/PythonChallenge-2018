@@ -1,6 +1,6 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python
 # vim: tabstop=8 expandtab shiftwidth=4 softtabstop=4
-"""Pull a cisco list of 10Meg devices."""
+"""Pull a Cisco list of 10Meg devices."""
 
 from netmiko import ConnectHandler
 import getpass
@@ -36,7 +36,14 @@ def main():
         mo = match10m.search(line)
         if mo is not None:
             newline = line.split()
-            print(newline[0], newline[3], newline[4])
+            print(f"{newline[0]}, {newline[3]}, {newline[4]}")
+            interface_mac = net_connect.send_command(f"show mac address-table interface {newline[0]}")
+            match_mac = re.compile(r"([0-9]|[a-f]){4}[/.]([0-9]|[a-f]){4}[/.]([0-9]|[a-f]){4}")
+            for i in interface_mac.split("\n"):
+                mo2 = match_mac.search(i)
+                if mo2 is not None:
+                    print(mo2.string.split()[1])
+
 
 
 if __name__ == "__main__":

@@ -1,6 +1,26 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 """Manage unix style aliases"""
 import argparse
+import sys
+
+
+class Aka(object):
+
+    def __init__(self):
+        parser = argparse.ArgumentParser(
+            description='Manages aliases',
+            usage='''git <command> [<args>]
+            
+            Commands:
+            add     Add an alias
+            delete  Delete an alias'''
+        )
+        parser.add_argument('command', help='Subcommand to run ')
+        args = parser.parse_args(sys.argv[1:2])
+        if not hasattr(self, args.command):
+            print('Unrecognized command')
+            parser.print_help()
+            exit(1)
 
 
 def add_alias(alias_to_add):
@@ -28,4 +48,4 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    Aka()
